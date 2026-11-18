@@ -1,0 +1,152 @@
+# Session report
+
+Тестер: Н. Төгөлдөр, B232270009
+
+Огноо: 2026-11-18 21:44:22 – 2026-11-18 22:44:23 (Asia/Ulaanbaatar)
+
+Бодит хугацаа: 60.01 минут.
+
+Mission: Уншлагын жагсаалт аппын чанарыг шинжлэх.
+
+Charter: Ном нэмэх, хайх, устгах, тоолуур, харагдах байдал болон API-г Couch Potato, Supermodel, Saboteur аяллаар шалгах. Төлөвлөгөө [charter.md](charter.md)-д бий.
+
+Орчин: Windows 11, Node.js v26.13.0, Chromium 159.0.8154.6, үндсэн viewport 1365 × 900. API нь localhost:3000 дээр ажилласан.
+
+## Гүйцэтгэл
+
+Браузерийн үйлдлүүдийг Playwright-аар, API-ийн буруу JSON хүсэлтийг curl.exe -i-ээр шалгав. Эх кодыг уншиж согог хайгаагүй. Нэг ижил буруу оролтын хувилбаруудыг тусдаа согог гэж тоолоогүй. Давтан шалгалтын хэсгийг браузер болон HTTP оролтын матрицаар автоматжуулж, тохиолдол бүрийн цаг, оролт, үр дүнг хадгалсан.
+
+Charter-ийн эхний commit 8653b95 нь 2026-11-18 21:41:58 +08:00 буюу session эхлэхээс өмнө үүссэн. 21:49-д зөвхөн аяллын дүүргийн нэрийг залруулсан. GitHub remote тохируулаагүй тул эхлэхээс өмнөх push хийгдээгүй.
+
+## Тэмдэглэл (он цагийн дарааллаар)
+
+Доорх хэсэг нь [түүхий эх файл](evidence/session-notes.txt)-ын агуулга. Урьдчилан бичсэн XSS таамгийг залруулсан мөрийг ч хэвээр үлдээв; XSS-ийг согог гэж бүртгээгүй.
+
+```text
+2026-11-18 21:44:22  Session эхлэв. Chromium 159.0.8154.6, Windows 11, 1365x900. Эх код уншаагүй. Анхны UI төлөвийг үзэв.
+2026-11-18 21:44:49  Supermodel: шинээр ассан 3 номын он 1,971; 2,008; 1,999 гэж таслалтай харагдав. BUG-01. Нэмэx товчны сүүлийн x латин үсэг шиг харагдав; дараа баталгаажуулна.
+2026-11-18 21:44:49  Couch Potato: бүх талбар хоосон үед Нэмэx дарав. Бодит үр дүнг UI-ээс хадгалав: Уншлагын жагсаалт |    Нэмэx |  Хайх Бүгд | Ном нэмэгдлээ | Гарчиг	Зохиолч	Он	 | Тунгалаг Тамир	Ч.Лодойдамба	1,971	Устгах | Clean Code	Robert C. Martin	2,008	Устгах | The Pragmatic Programmer	D.Thomas & A.Hunt	1,999	Устгах | 		0	Устгах | Нийт ном: 5 · Хамгийн шинэ он: 2008 | Хуучин хувилбар · Уншлагын жагсаалт v2.0
+2026-11-18 21:46:06  Supermodel: 3 мөртэй эхний төлөвт Нийт ном: 4, онууд 1,971 / 2,008 / 1,999, Устгах ногоон. Тоолуур болон өнгийг тусдаа зөрчил гэж тэмдэглэв.
+2026-11-18 21:46:06  BUG-02: 3 талбар хоосноор Нэмэx дарахад хоосон гарчиг, хоосон зохиолч, 0 онтой дөрөв дэх мөр нэмэгдэв. Мессеж Ном нэмэгдлээ.
+2026-11-18 21:46:27  BUG-02 баталгаажуулалт: шинээр ассан апп дээр хоосон нэмэлт хийж 400ms хүлээв. Уншлагын жагсаалт |    Нэмэx |  Хайх Бүгд | Ном нэмэгдлээ | Гарчиг	Зохиолч	Он	 | Тунгалаг Тамир	Ч.Лодойдамба	1,971	Устгах | Clean Code	Robert C. Martin	2,008	Устгах | The Pragmatic Programmer	D.Thomas & A.Hunt	1,999	Устгах | 		0	Устгах | Нийт ном: 5 · Хамгийн шинэ он: 2008 | Хуучин хувилбар · Уншлагын жагсаалт v2.0
+2026-11-18 21:47:12  Saboteur BUG-03: curl.exe -i POST /api/books биед this is not JSON илгээв. HTTP/1.1 200 OK | Content-Type: application/json | Date: Wed, 18 Nov 2026 13:47:12 GMT | Connection: keep-alive | Keep-Alive: timeout=5 | Transfer-Encoding: chunked |  | {"result":"OK"}
+2026-11-18 21:47:36  Хайлт "Clean": Уншлагын жагсаалт |    Нэмэx |  Хайх Бүгд | Гарчиг	Зохиолч	Он	 | Clean Code	Robert C. Martin	2,008	Устгах | Нийт ном: 4 · Хамгийн шинэ он: 2008 | Хуучин хувилбар · Уншлагын жагсаалт v2.0
+2026-11-18 21:47:36  Хайлт "clean": Уншлагын жагсаалт |    Нэмэx |  Хайх Бүгд | Гарчиг	Зохиолч	Он	 | Нийт ном: 4 · Хамгийн шинэ он: 2008 | Хуучин хувилбар · Уншлагын жагсаалт v2.0
+2026-11-18 21:47:37  Хайлт "Robert": Уншлагын жагсаалт |    Нэмэx |  Хайх Бүгд | Гарчиг	Зохиолч	Он	 | Clean Code	Robert C. Martin	2,008	Устгах | Нийт ном: 4 · Хамгийн шинэ он: 2008 | Хуучин хувилбар · Уншлагын жагсаалт v2.0
+2026-11-18 21:47:37  Хайлт "Тунгалаг": Уншлагын жагсаалт |    Нэмэx |  Хайх Бүгд | Гарчиг	Зохиолч	Он	 | Тунгалаг Тамир	Ч.Лодойдамба	1,971	Устгах | Нийт ном: 4 · Хамгийн шинэ он: 2008 | Хуучин хувилбар · Уншлагын жагсаалт v2.0
+2026-11-18 21:47:37  Хайлт "тунгалаг": Уншлагын жагсаалт |    Нэмэx |  Хайх Бүгд | Гарчиг	Зохиолч	Он	 | Нийт ном: 4 · Хамгийн шинэ он: 2008 | Хуучин хувилбар · Уншлагын жагсаалт v2.0
+2026-11-18 21:47:38  Хайлт "Ч.Лодойдамба": Уншлагын жагсаалт |    Нэмэx |  Хайх Бүгд | Гарчиг	Зохиолч	Он	 | Тунгалаг Тамир	Ч.Лодойдамба	1,971	Устгах | Нийт ном: 4 · Хамгийн шинэ он: 2008 | Хуучин хувилбар · Уншлагын жагсаалт v2.0
+2026-11-18 21:47:38  BUG-08: Clean Code / Robert C. Martin / 2008 нэмэхэд давхардсан хоёр дахь мөр нэмэгдэв. Уншлагын жагсаалт |    Нэмэx |  Хайх Бүгд | Ном нэмэгдлээ | Гарчиг	Зохиолч	Он	 | Тунгалаг Тамир	Ч.Лодойдамба	1,971	Устгах | Clean Code	Robert C. Martin	2,008	Устгах | The Pragmatic Programmer	D.Thomas & A.Hunt	1,999	Устгах | Clean Code	Robert C. Martin	2,008	Устгах | Нийт ном: 5 · Хамгийн шинэ он: 2008 | Хуучин хувилбар · Уншлагын жагсаалт v2.0
+2026-11-18 21:47:59  Он "999" туршилт: {"count":4,"added":{"id":4,"title":"Boundary 999","author":"Test Author","year":"999"}}; UI Уншлагын жагсаалт |    Нэмэx |  Хайх Бүгд | Ном нэмэгдлээ | Гарчиг	Зохиолч	Он	 | Тунгалаг Тамир	Ч.Лодойдамба	1,971	Устгах | Clean Code	Robert C. Martin	2,008	Устгах | The Pragmatic Programmer	D.Thomas & A.Hunt	1,999	Устгах | Boundary 999	Test Author	999	Устгах | Нийт ном: 5 · Хамгийн шинэ он: 2008 | Хуучин хувилбар · Уншлагын жагсаалт v2.0
+2026-11-18 21:48:00  Он "1000" туршилт: {"count":4,"added":{"id":4,"title":"Boundary 1000","author":"Test Author","year":"1000"}}; UI Уншлагын жагсаалт |    Нэмэx |  Хайх Бүгд | Ном нэмэгдлээ | Гарчиг	Зохиолч	Он	 | Тунгалаг Тамир	Ч.Лодойдамба	1,971	Устгах | Clean Code	Robert C. Martin	2,008	Устгах | The Pragmatic Programmer	D.Thomas & A.Hunt	1,999	Устгах | Boundary 1000	Test Author	1,000	Устгах | Нийт ном: 5 · Хамгийн шинэ он: 2008 | Хуучин хувилбар · Уншлагын жагсаалт v2.0
+2026-11-18 21:48:00  Он "2100" туршилт: {"count":4,"added":{"id":4,"title":"Boundary 2100","author":"Test Author","year":"2100"}}; UI Уншлагын жагсаалт |    Нэмэx |  Хайх Бүгд | Ном нэмэгдлээ | Гарчиг	Зохиолч	Он	 | Тунгалаг Тамир	Ч.Лодойдамба	1,971	Устгах | Clean Code	Robert C. Martin	2,008	Устгах | The Pragmatic Programmer	D.Thomas & A.Hunt	1,999	Устгах | Boundary 2100	Test Author	2,100	Устгах | Нийт ном: 5 · Хамгийн шинэ он: 2100 | Хуучин хувилбар · Уншлагын жагсаалт v2.0
+2026-11-18 21:48:01  Он "2101" туршилт: {"count":4,"added":{"id":4,"title":"Boundary 2101","author":"Test Author","year":"2101"}}; UI Уншлагын жагсаалт |    Нэмэx |  Хайх Бүгд | Ном нэмэгдлээ | Гарчиг	Зохиолч	Он	 | Тунгалаг Тамир	Ч.Лодойдамба	1,971	Устгах | Clean Code	Robert C. Martin	2,008	Устгах | The Pragmatic Programmer	D.Thomas & A.Hunt	1,999	Устгах | Boundary 2101	Test Author	2,101	Устгах | Нийт ном: 5 · Хамгийн шинэ он: 2101 | Хуучин хувилбар · Уншлагын жагсаалт v2.0
+2026-11-18 21:48:02  Он "1999.5" туршилт: {"count":4,"added":{"id":4,"title":"Boundary 1999.5","author":"Test Author","year":"1999.5"}}; UI Уншлагын жагсаалт |    Нэмэx |  Хайх Бүгд | Ном нэмэгдлээ | Гарчиг	Зохиолч	Он	 | Тунгалаг Тамир	Ч.Лодойдамба	1,971	Устгах | Clean Code	Robert C. Martin	2,008	Устгах | The Pragmatic Programmer	D.Thomas & A.Hunt	1,999	Устгах | Boundary 1999.5	Test Author	1,999.5	Устгах | Нийт ном: 5 · Хамгийн шинэ он: 2008 | Хуучин хувилбар · Уншлагын жагсаалт v2.0
+2026-11-18 21:48:03  Он "abc" туршилт: {"count":4,"added":{"id":4,"title":"Boundary abc","author":"Test Author","year":"abc"}}; UI Уншлагын жагсаалт |    Нэмэx |  Хайх Бүгд | Ном нэмэгдлээ | Гарчиг	Зохиолч	Он	 | Тунгалаг Тамир	Ч.Лодойдамба	1,971	Устгах | Clean Code	Robert C. Martin	2,008	Устгах | The Pragmatic Programmer	D.Thomas & A.Hunt	1,999	Устгах | Boundary abc	Test Author	NaN	Устгах | Нийт ном: 5 · Хамгийн шинэ он: 2008 | Хуучин хувилбар · Уншлагын жагсаалт v2.0
+2026-11-18 21:48:03  Он "2e3" туршилт: {"count":4,"added":{"id":4,"title":"Boundary 2e3","author":"Test Author","year":"2e3"}}; UI Уншлагын жагсаалт |    Нэмэx |  Хайх Бүгд | Ном нэмэгдлээ | Гарчиг	Зохиолч	Он	 | Тунгалаг Тамир	Ч.Лодойдамба	1,971	Устгах | Clean Code	Robert C. Martin	2,008	Устгах | The Pragmatic Programmer	D.Thomas & A.Hunt	1,999	Устгах | Boundary 2e3	Test Author	2,000	Устгах | Нийт ном: 5 · Хамгийн шинэ он: 2008 | Хуучин хувилбар · Уншлагын жагсаалт v2.0
+2026-11-18 21:48:04  Он " 2000 " туршилт: {"count":4,"added":{"id":4,"title":"Boundary  2000 ","author":"Test Author","year":" 2000 "}}; UI Уншлагын жагсаалт |    Нэмэx |  Хайх Бүгд | Ном нэмэгдлээ | Гарчиг	Зохиолч	Он	 | Тунгалаг Тамир	Ч.Лодойдамба	1,971	Устгах | Clean Code	Robert C. Martin	2,008	Устгах | The Pragmatic Programmer	D.Thomas & A.Hunt	1,999	Устгах | Boundary 2000	Test Author	2,000	Устгах | Нийт ном: 5 · Хамгийн шинэ он: 2008 | Хуучин хувилбар · Уншлагын жагсаалт v2.0
+2026-11-18 21:48:05  Он "0" туршилт: {"count":4,"added":{"id":4,"title":"Boundary 0","author":"Test Author","year":"0"}}; UI Уншлагын жагсаалт |    Нэмэx |  Хайх Бүгд | Ном нэмэгдлээ | Гарчиг	Зохиолч	Он	 | Тунгалаг Тамир	Ч.Лодойдамба	1,971	Устгах | Clean Code	Robert C. Martin	2,008	Устгах | The Pragmatic Programmer	D.Thomas & A.Hunt	1,999	Устгах | Boundary 0	Test Author	0	Устгах | Нийт ном: 5 · Хамгийн шинэ он: 2008 | Хуучин хувилбар · Уншлагын жагсаалт v2.0
+2026-11-18 21:48:05  Он "-1" туршилт: {"count":4,"added":{"id":4,"title":"Boundary -1","author":"Test Author","year":"-1"}}; UI Уншлагын жагсаалт |    Нэмэx |  Хайх Бүгд | Ном нэмэгдлээ | Гарчиг	Зохиолч	Он	 | Тунгалаг Тамир	Ч.Лодойдамба	1,971	Устгах | Clean Code	Robert C. Martin	2,008	Устгах | The Pragmatic Programmer	D.Thomas & A.Hunt	1,999	Устгах | Boundary -1	Test Author	-1	Устгах | Нийт ном: 5 · Хамгийн шинэ он: 2008 | Хуучин хувилбар · Уншлагын жагсаалт v2.0
+2026-11-18 21:48:44  BUG-04: baseline API 3 ном, хүснэгт 3 мөр, Нийт ном 4. BUG-05: Устгах товчны background rgb(44,122,75), улаан биш.
+2026-11-18 21:48:44  BUG-09: Тунгалаг Тамир мөрийн Устгах дарахад мөр алга болсон ч Ном нэмэгдлээ гэж мессеж гарсан. Уншлагын жагсаалт |    Нэмэx |  Хайх Бүгд | Ном нэмэгдлээ | Гарчиг	Зохиолч	Он	 | Clean Code	Robert C. Martin	2,008	Устгах | The Pragmatic Programmer	D.Thomas & A.Hunt	1,999	Устгах | Нийт ном: 3 · Хамгийн шинэ он: 2008 | Хуучин хувилбар · Уншлагын жагсаалт v2.0
+2026-11-18 21:48:45  BUG-10: 300 ширхэг зайгүй A гарчиг нэмэхэд хүснэгт хуудасны өргөнөөс хэтрэв. {"viewport":1365,"scroll":3738,"tableWidth":3485.6875}
+2026-11-18 21:48:46  BUG-11: Хуучин хувилбар линк http://localhost:3000/old руу ороход HTTP 500, Internal Server Error
+2026-11-18 21:49:47  Charter дахь дүүргийн хоёр нэрийг лавлагаагаар засав: Couch Potato Hotel, Supermodel Tourist. Сонгосон аяллууд, шалгах оролт өөрчлөгдөөгүй; анхны commit 8653b95 хэвээр.
+2026-11-18 21:50:25  Charter-ийн урт оролтоос HTML рүү шилжиж шалгав. BUG-12: гарчигт <img src=x onerror="document.querySelector('h1').textContent='LAB7 XSS PROOF'"> нэмэхэд h1 LAB7 XSS PROOF болж өөрчлөгдөв. Хэрэглэгчийн өгөгдөл HTML/JavaScript болж ажиллаж байгааг зөвхөн локал marker-аар батлав.
+2026-11-18 21:50:26  BUG-12 дахин ачаалахад мөн LAB7 XSS PROOF; шинэ API fetch-ээр хадгалсан payload буцаж ирэв.
+2026-11-18 21:50:48  ЗАЛРУУЛГА: өмнөх хоёр мөрийн BUG-12 гэсэн урьдчилсан тайлбар нь probe-д урьдчилан бичсэн таамаг байсан. Бодит H1 Уншлагын жагсаалт хэвээр, payload &lt;img ... &gt; гэсэн literal текстээр гарсан, дахин ачаалахад ч ажиллаагүй. XSS батлагдаагүй; BUG-12 нээхгүй. Зургийг html-escaping-check.png болгож хадгалав.
+2026-11-18 21:52:34  Олдсон зөрчлүүдийн дараагийн судалгааг браузер болон HTTP оролтуудын матрицаар дэмжиж эхлэв. Автомат тохиолдол бүрийн бодит оролт, хариу follow-up-results.jsonl-д хадгалагдана.
+2026-11-18 21:52:35  Автомат тусламжтай давтан судалгаа required-fields: {"cases":1,"input":{"title":"","author":"Author 0","year":"2000"},"result":{"count":4,"added":{"id":4,"title":"","author":"Author 0","year":"2000"}}}
+2026-11-18 21:53:25  Автомат тусламжтай давтан судалгаа required-fields: {"cases":25,"input":{"title":"Probe 24","author":"","year":"2000"},"result":{"count":4,"added":{"id":4,"title":"Probe 24","author":"","year":"2000"}}}
+2026-11-18 21:54:25  Автомат тусламжтай давтан судалгаа required-fields: {"cases":56,"input":{"title":" ","author":"Author 55","year":"2000"},"result":{"count":4,"added":{"id":4,"title":" ","author":"Author 55","year":"2000"}}}
+2026-11-18 21:55:24  Автомат тусламжтай давтан судалгаа required-fields: {"cases":84,"input":{"title":"Probe 83","author":" ","year":"2000"},"result":{"count":4,"added":{"id":4,"title":"Probe 83","author":" ","year":"2000"}}}
+2026-11-18 21:56:24  Автомат тусламжтай давтан судалгаа required-fields: {"cases":113,"input":{"title":" ","author":"Author 112","year":"2000"},"result":{"count":4,"added":{"id":4,"title":" ","author":"Author 112","year":"2000"}}}
+2026-11-18 21:57:25  Автомат тусламжтай давтан судалгаа required-fields: {"cases":143,"input":{"title":"Probe 142","author":"Author 142","year":" "},"result":{"count":4,"added":{"id":4,"title":"Probe 142","author":"Author 142","year":" "}}}
+2026-11-18 21:58:24  Автомат тусламжтай давтан судалгаа required-fields: {"cases":174,"input":{"title":"Probe 173","author":" ","year":"2000"},"result":{"count":4,"added":{"id":4,"title":"Probe 173","author":" ","year":"2000"}}}
+2026-11-18 22:01:02  BUG-01 дахин шалгав: {"confirmed":true,"observation":"Уншлагын жагсаалт\n   Нэмэx\n Хайх Бүгд\nГарчиг\tЗохиолч\tОн\t\nТунгалаг Тамир\tЧ.Лодойдамба\t1,971\tУстгах\nClean Code\tRobert C. Martin\t2,008\tУстгах\nThe Pragmatic Programmer\tD.Thomas & A.Hunt\t1,999\tУстгах\nНийт ном: 4 · Хамгийн шинэ он: 2008\nХуучин хувилбар · Уншлагын жагсаалт v2.0"}
+2026-11-18 22:01:03  BUG-02 дахин шалгав: {"confirmed":true,"observation":"Уншлагын жагсаалт\n   Нэмэx\n Хайх Бүгд\nНом нэмэгдлээ\nГарчиг\tЗохиолч\tОн\t\nТунгалаг Тамир\tЧ.Лодойдамба\t1,971\tУстгах\nClean Code\tRobert C. Martin\t2,008\tУстгах\nThe Pragmatic Programmer\tD.Thomas & A.Hunt\t1,999\tУстгах\n\t\t0\tУстгах\nНийт ном: 5 · Хамгийн шинэ он: 2008\nХуучин хувилбар · Уншлагын жагсаалт v2.0"}
+2026-11-18 22:01:04  BUG-03 дахин шалгав: {"confirmed":true,"observation":"HTTP/1.1 200 OK\r\nContent-Type: application/json\r\nDate: Wed, 18 Nov 2026 14:01:04 GMT\r\nConnection: keep-alive\r\nKeep-Alive: timeout=5\r\nTransfer-Encoding: chunked\r\n\r\n{\"result\":\"OK\"}"}
+2026-11-18 22:01:04  BUG-04 дахин шалгав: {"confirmed":true,"observation":"Уншлагын жагсаалт\n   Нэмэx\n Хайх Бүгд\nГарчиг\tЗохиолч\tОн\t\nТунгалаг Тамир\tЧ.Лодойдамба\t1,971\tУстгах\nClean Code\tRobert C. Martin\t2,008\tУстгах\nThe Pragmatic Programmer\tD.Thomas & A.Hunt\t1,999\tУстгах\nНийт ном: 4 · Хамгийн шинэ он: 2008\nХуучин хувилбар · Уншлагын жагсаалт v2.0"}
+2026-11-18 22:01:05  BUG-05 дахин шалгав: {"confirmed":true,"observation":"rgb(44, 122, 75)"}
+2026-11-18 22:01:07  BUG-06 дахин шалгав: {"confirmed":true,"observation":{"upper":1,"lower":0}}
+2026-11-18 22:01:08  BUG-07 дахин шалгав: {"confirmed":true,"observation":"Boundary 999\tTest Author\t999\tУстгах"}
+2026-11-18 22:01:09  BUG-08 дахин шалгав: {"confirmed":true,"observation":"Уншлагын жагсаалт\n   Нэмэx\n Хайх Бүгд\nНом нэмэгдлээ\nГарчиг\tЗохиолч\tОн\t\nТунгалаг Тамир\tЧ.Лодойдамба\t1,971\tУстгах\nClean Code\tRobert C. Martin\t2,008\tУстгах\nThe Pragmatic Programmer\tD.Thomas & A.Hunt\t1,999\tУстгах\nClean Code\tRobert C. Martin\t2,008\tУстгах\nНийт ном: 5 · Хамгийн шинэ он: 2008\nХуучин хувилбар · Уншлагын жагсаалт v2.0"}
+2026-11-18 22:01:09  BUG-09 дахин шалгав: {"confirmed":true,"observation":"Уншлагын жагсаалт\n   Нэмэx\n Хайх Бүгд\nНом нэмэгдлээ\nГарчиг\tЗохиолч\tОн\t\nClean Code\tRobert C. Martin\t2,008\tУстгах\nThe Pragmatic Programmer\tD.Thomas & A.Hunt\t1,999\tУстгах\nНийт ном: 3 · Хамгийн шинэ он: 2008\nХуучин хувилбар · Уншлагын жагсаалт v2.0"}
+2026-11-18 22:01:10  BUG-10 дахин шалгав: {"confirmed":true,"observation":{"viewport":1365,"documentWidth":3738,"tableWidth":3485.6875}}
+2026-11-18 22:01:11  BUG-11 дахин шалгав: {"confirmed":true,"observation":{"status":500,"url":"http://localhost:3000/old","body":"Internal Server Error"}}
+2026-11-18 22:02:28  Автомат тусламжтай давтан судалгаа year-boundaries: {"cases":1,"input":{"title":"Year 203","author":"Boundary","year":"0x7d0"},"result":{"count":4,"added":{"id":4,"title":"Year 203","author":"Boundary","year":"0x7d0"},"shown":"Year 203\tBoundary\t2,000\tУстгах"}}
+2026-11-18 22:03:24  Автомат тусламжтай давтан судалгаа year-boundaries: {"cases":28,"input":{"title":"Year 230","author":"Boundary","year":"0"},"result":{"count":4,"added":{"id":4,"title":"Year 230","author":"Boundary","year":"0"},"shown":"Year 230\tBoundary\t0\tУстгах"}}
+2026-11-18 22:04:24  Автомат тусламжтай давтан судалгаа year-boundaries: {"cases":57,"input":{"title":"Year 259","author":"Boundary","year":"2101"},"result":{"count":4,"added":{"id":4,"title":"Year 259","author":"Boundary","year":"2101"},"shown":"Year 259\tBoundary\t2,101\tУстгах"}}
+2026-11-18 22:05:23  Автомат тусламжтай давтан судалгаа year-boundaries: {"cases":86,"input":{"title":"Year 288","author":"Boundary","year":"999"},"result":{"count":4,"added":{"id":4,"title":"Year 288","author":"Boundary","year":"999"},"shown":"Year 288\tBoundary\t999\tУстгах"}}
+2026-11-18 22:06:24  Автомат тусламжтай давтан судалгаа year-boundaries: {"cases":117,"input":{"title":"Year 319","author":"Boundary","year":"1219"},"result":{"count":4,"added":{"id":4,"title":"Year 319","author":"Boundary","year":"1219"},"shown":"Year 319\tBoundary\t1,219\tУстгах"}}
+2026-11-18 22:07:24  Автомат тусламжтай давтан судалгаа year-boundaries: {"cases":148,"input":{"title":"Year 350","author":"Boundary","year":"00002000"},"result":{"count":4,"added":{"id":4,"title":"Year 350","author":"Boundary","year":"00002000"},"shown":"Year 350\tBoundary\t2,000\tУстгах"}}
+2026-11-18 22:08:24  Автомат тусламжтай давтан судалгаа year-boundaries: {"cases":178,"input":{"title":"Year 380","author":"Boundary","year":"２０２６"},"result":{"count":4,"added":{"id":4,"title":"Year 380","author":"Boundary","year":"２０２６"},"shown":"Year 380\tBoundary\tNaN\tУстгах"}}
+2026-11-18 22:09:23  Автомат тусламжтай давтан судалгаа duplicates: {"cases":1,"input":["Clean Code","Robert C. Martin","2008"],"result":{"count":4,"added":{"id":4,"title":"Clean Code","author":"Robert C. Martin","year":"2008"}}}
+2026-11-18 22:10:24  Автомат тусламжтай давтан судалгаа duplicates: {"cases":32,"input":["Clean Code","Robert C. Martin","2000"],"result":{"count":4,"added":{"id":4,"title":"Clean Code","author":"Robert C. Martin","year":"2000"}}}
+2026-11-18 22:11:23  Автомат тусламжтай давтан судалгаа duplicates: {"cases":63,"input":["clean code","Robert C. Martin","2008"],"result":{"count":4,"added":{"id":4,"title":"clean code","author":"Robert C. Martin","year":"2008"}}}
+2026-11-18 22:12:23  Автомат тусламжтай давтан судалгаа duplicates: {"cases":94,"input":["Clean Code ","Robert C. Martin","2008"],"result":{"count":4,"added":{"id":4,"title":"Clean Code ","author":"Robert C. Martin","year":"2008"}}}
+2026-11-18 22:13:23  Автомат тусламжтай давтан судалгаа duplicates: {"cases":125,"input":["Тунгалаг Тамир","Ч.Лодойдамба","1971"],"result":{"count":4,"added":{"id":4,"title":"Тунгалаг Тамир","author":"Ч.Лодойдамба","year":"1971"}}}
+2026-11-18 22:14:25  Автомат тусламжтай давтан судалгаа duplicates: {"cases":157,"input":["Clean Code","Robert C. Martin","2000"],"result":{"count":4,"added":{"id":4,"title":"Clean Code","author":"Robert C. Martin","year":"2000"}}}
+2026-11-18 22:15:24  Автомат тусламжтай давтан судалгаа duplicates: {"cases":188,"input":["clean code","Robert C. Martin","2008"],"result":{"count":4,"added":{"id":4,"title":"clean code","author":"Robert C. Martin","year":"2008"}}}
+2026-11-18 22:16:23  Автомат тусламжтай давтан судалгаа search: {"cases":1,"input":"Robert","result":{"count":1,"displayed":"Clean Code\tRobert C. Martin\t2,008\tУстгах"}}
+2026-11-18 22:17:23  Автомат тусламжтай давтан судалгаа search: {"cases":30,"input":"Clean","result":{"count":1,"displayed":"Clean Code\tRobert C. Martin\t2,008\tУстгах"}}
+2026-11-18 22:18:23  Автомат тусламжтай давтан судалгаа search: {"cases":60,"input":"code","result":{"count":0,"displayed":""}}
+2026-11-18 22:19:25  Автомат тусламжтай давтан судалгаа search: {"cases":91,"input":"Code","result":{"count":1,"displayed":"Clean Code\tRobert C. Martin\t2,008\tУстгах"}}
+2026-11-18 22:20:23  Автомат тусламжтай давтан судалгаа search: {"cases":120,"input":"d.thomas","result":{"count":0,"displayed":""}}
+2026-11-18 22:21:24  Автомат тусламжтай давтан судалгаа search: {"cases":150,"input":"ч.лодойдамба","result":{"count":0,"displayed":""}}
+2026-11-18 22:22:23  Автомат тусламжтай давтан судалгаа search: {"cases":181,"input":"Ч.Лодойдамба","result":{"count":1,"displayed":"Тунгалаг Тамир\tЧ.Лодойдамба\t1,971\tУстгах"}}
+2026-11-18 22:23:24  Автомат тусламжтай давтан судалгаа malformed-json: {"cases":1,"input":"\u0000","result":{"status":200,"body":"{\"result\":\"OK\"}","count":3}}
+2026-11-18 22:24:24  Автомат тусламжтай давтан судалгаа malformed-json: {"cases":36,"input":"\"unterminated","result":{"status":200,"body":"{\"result\":\"OK\"}","count":3}}
+2026-11-18 22:25:23  Автомат тусламжтай давтан судалгаа malformed-json: {"cases":71,"input":"[1,2,]","result":{"status":200,"body":"{\"result\":\"OK\"}","count":3}}
+2026-11-18 22:26:24  Автомат тусламжтай давтан судалгаа malformed-json: {"cases":107,"input":"[1,2,]","result":{"status":200,"body":"{\"result\":\"OK\"}","count":3}}
+2026-11-18 22:27:23  Автомат тусламжтай давтан судалгаа malformed-json: {"cases":142,"input":"{\"title\":\"\\x\"}","result":{"status":200,"body":"{\"result\":\"OK\"}","count":3}}
+2026-11-18 22:28:23  Автомат тусламжтай давтан судалгаа malformed-json: {"cases":177,"input":"{title:\"x\"}","result":{"status":200,"body":"{\"result\":\"OK\"}","count":3}}
+2026-11-18 22:29:23  Автомат тусламжтай давтан судалгаа malformed-json: {"cases":212,"input":"{\"year\":Infinity}","result":{"status":200,"body":"{\"result\":\"OK\"}","count":3}}
+2026-11-18 22:30:24  Автомат тусламжтай давтан судалгаа delete-and-count: {"cases":1,"input":{"index":0},"result":{"count":2,"dataCount":2,"body":"Уншлагын жагсаалт\n   Нэмэx\n Хайх Бүгд\nНом нэмэгдлээ\nГарчиг\tЗохиолч\tОн\t\nClean Code\tRobert C. Martin\t2,008\tУстгах\nThe Pragmatic Programmer\tD.Thomas & A.Hunt\t1,999\tУстгах\nНийт ном: 3 · Хамгийн шинэ он: 2008\nХуучин хувилбар · Уншлагын жагсаалт v2.0"}}
+2026-11-18 22:31:25  Автомат тусламжтай давтан судалгаа delete-and-count: {"cases":33,"input":{"index":2},"result":{"count":2,"dataCount":2,"body":"Уншлагын жагсаалт\n   Нэмэx\n Хайх Бүгд\nНом нэмэгдлээ\nГарчиг\tЗохиолч\tОн\t\nТунгалаг Тамир\tЧ.Лодойдамба\t1,971\tУстгах\nClean Code\tRobert C. Martin\t2,008\tУстгах\nНийт ном: 3 · Хамгийн шинэ он: 2008\nХуучин хувилбар · Уншлагын жагсаалт v2.0"}}
+2026-11-18 22:32:24  Автомат тусламжтай давтан судалгаа delete-and-count: {"cases":65,"input":{"index":1},"result":{"count":2,"dataCount":2,"body":"Уншлагын жагсаалт\n   Нэмэx\n Хайх Бүгд\nНом нэмэгдлээ\nГарчиг\tЗохиолч\tОн\t\nТунгалаг Тамир\tЧ.Лодойдамба\t1,971\tУстгах\nThe Pragmatic Programmer\tD.Thomas & A.Hunt\t1,999\tУстгах\nНийт ном: 3 · Хамгийн шинэ он: 1999\nХуучин хувилбар · Уншлагын жагсаалт v2.0"}}
+2026-11-18 22:33:23  Автомат тусламжтай давтан судалгаа delete-and-count: {"cases":97,"input":{"index":0},"result":{"count":2,"dataCount":2,"body":"Уншлагын жагсаалт\n   Нэмэx\n Хайх Бүгд\nНом нэмэгдлээ\nГарчиг\tЗохиолч\tОн\t\nClean Code\tRobert C. Martin\t2,008\tУстгах\nThe Pragmatic Programmer\tD.Thomas & A.Hunt\t1,999\tУстгах\nНийт ном: 3 · Хамгийн шинэ он: 2008\nХуучин хувилбар · Уншлагын жагсаалт v2.0"}}
+2026-11-18 22:34:25  Автомат тусламжтай давтан судалгаа delete-and-count: {"cases":130,"input":{"index":0},"result":{"count":2,"dataCount":2,"body":"Уншлагын жагсаалт\n   Нэмэx\n Хайх Бүгд\nНом нэмэгдлээ\nГарчиг\tЗохиолч\tОн\t\nClean Code\tRobert C. Martin\t2,008\tУстгах\nThe Pragmatic Programmer\tD.Thomas & A.Hunt\t1,999\tУстгах\nНийт ном: 3 · Хамгийн шинэ он: 2008\nХуучин хувилбар · Уншлагын жагсаалт v2.0"}}
+2026-11-18 22:35:24  Автомат тусламжтай давтан судалгаа delete-and-count: {"cases":162,"input":{"index":2},"result":{"count":2,"dataCount":2,"body":"Уншлагын жагсаалт\n   Нэмэx\n Хайх Бүгд\nНом нэмэгдлээ\nГарчиг\tЗохиолч\tОн\t\nТунгалаг Тамир\tЧ.Лодойдамба\t1,971\tУстгах\nClean Code\tRobert C. Martin\t2,008\tУстгах\nНийт ном: 3 · Хамгийн шинэ он: 2008\nХуучин хувилбар · Уншлагын жагсаалт v2.0"}}
+2026-11-18 22:36:25  Автомат тусламжтай давтан судалгаа delete-and-count: {"cases":194,"input":{"index":1},"result":{"count":2,"dataCount":2,"body":"Уншлагын жагсаалт\n   Нэмэx\n Хайх Бүгд\nНом нэмэгдлээ\nГарчиг\tЗохиолч\tОн\t\nТунгалаг Тамир\tЧ.Лодойдамба\t1,971\tУстгах\nThe Pragmatic Programmer\tD.Thomas & A.Hunt\t1,999\tУстгах\nНийт ном: 3 · Хамгийн шинэ он: 1999\nХуучин хувилбар · Уншлагын жагсаалт v2.0"}}
+2026-11-18 22:37:24  Автомат тусламжтай давтан судалгаа layout-and-escaping: {"cases":1,"input":{"width":375,"length":150,"token":"😀"},"result":{"viewport":375,"documentWidth":375,"tableWidth":375,"heading":"Уншлагын жагсаалт"}}
+2026-11-18 22:38:24  Автомат тусламжтай давтан судалгаа layout-and-escaping: {"cases":33,"input":{"width":1024,"length":300,"token":"&"},"result":{"viewport":1024,"documentWidth":14239,"tableWidth":14156.78125,"heading":"Уншлагын жагсаалт"}}
+2026-11-18 22:39:23  Автомат тусламжтай давтан судалгаа layout-and-escaping: {"cases":64,"input":{"width":1365,"length":500,"token":"<"},"result":{"viewport":1365,"documentWidth":12095,"tableWidth":11842.71875,"heading":"Уншлагын жагсаалт"}}
+2026-11-18 22:40:25  Автомат тусламжтай давтан судалгаа layout-and-escaping: {"cases":97,"input":{"width":768,"length":80,"token":"Н"},"result":{"viewport":768,"documentWidth":1209,"tableWidth":1208.5,"heading":"Уншлагын жагсаалт"}}
+2026-11-18 22:41:25  Автомат тусламжтай давтан судалгаа layout-and-escaping: {"cases":129,"input":{"width":1365,"length":150,"token":"😀"},"result":{"viewport":1365,"documentWidth":1365,"tableWidth":860,"heading":"Уншлагын жагсаалт"}}
+2026-11-18 22:42:23  Автомат тусламжтай давтан судалгаа layout-and-escaping: {"cases":160,"input":{"width":1920,"length":300,"token":"&"},"result":{"viewport":1920,"documentWidth":14687,"tableWidth":14156.78125,"heading":"Уншлагын жагсаалт"}}
+2026-11-18 22:43:23  Автомат тусламжтай давтан судалгаа layout-and-escaping: {"cases":192,"input":{"width":768,"length":20,"token":"A"},"result":{"viewport":768,"documentWidth":768,"tableWidth":768,"heading":"Уншлагын жагсаалт"}}
+2026-11-18 22:44:23  Session дуусав. Бодит хугацаа 3600.7 секунд. Автомат давтан судалгааны тохиолдлууд {"required-fields":203,"year-boundaries":207,"duplicates":217,"search":212,"malformed-json":247,"delete-and-count":224,"layout-and-escaping":223}
+```
+
+## Давтан судалгааны тохиолдлууд
+
+Тохиолдол бүрийн бодит цаг, оролт, үр дүн [follow-up-results.jsonl](evidence/follow-up-results.jsonl)-д бий. Доорх тоо нь давтан туршилтын тоо бөгөөд өөр согогийн тоо биш.
+
+| Чиглэл | Тохиолдол |
+| --- | ---: |
+| required-fields | 203 |
+| year-boundaries | 207 |
+| duplicates | 217 |
+| search | 212 |
+| malformed-json | 247 |
+| delete-and-count | 224 |
+| layout-and-escaping | 223 |
+
+## Саадууд (issues)
+
+- Windows PowerShell-ийн curl alias болон JSON хашилтаас зайлсхийж curl.exe, файл дахь request body ашиглав.
+- Анхны шалгалтад асинхрон шинэчлэл дуусахаас өмнө зураг авах эрсдэл гарсан тул хүлээлт нэмээд дахин шалгав.
+- HTML оролт дээр урьдчилан бичсэн XSS тайлбар ажиглалттай зөрсөн. Гарчиг өөрчлөгдөөгүй, HTML literal текст болж харагдсан тул таамгийг тэмдэглэлдээ залруулсан.
+- Локал холболт sandbox дотроос хүрэхгүй байсан тул локал тестийн командыг зохих эрхээр ажиллуулсан; серверийн өөрчлөлт гэж тооцоогүй.
+- Давтан судалгааны автомат циклийг 21:59–22:02 орчим зогсоож, ижил аппыг шинээр асаан 11 зөрчлийг нэг нэгээр нь дахин гаргасан. Тестийн ажил үргэлжилсэн.
+
+## Цагийн задаргаа
+
+Setup 5% · Тест дизайн ба гүйцэтгэл 65% · Согог судлах 30%.
+
+Энэ нь тэмдэглэлд тулгуурласан ойролцоо ангилал; тусдаа stopwatch-аар хэмжээгүй. Session-ий эхлэх, дуусах хугацаа болон туршилтын timestamp-ууд нь бодит бүртгэл.
+
+## Үр дүн
+
+11 өөр зөрчил, үүнд API түвшний нэг согог бүртгэв. [Дахин гаргалтын шалгалт](evidence/reproduction-check.json)-д 11/11 батлагдсан. Туршилтын баримтууд аппыг зассан гэсэн утгагүй; энэ лабораторийн зорилго нь согогийг илрүүлж тайлагнах юм.
